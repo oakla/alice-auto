@@ -1,0 +1,1459 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* height: 100vh; */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #exportBtn {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #exportBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Explorer</h1>
+    <ul>
+
+        <li><a href="/table/time_slots">time_slots</a></li>
+
+        <li><a href="/table/sqlite_sequence">sqlite_sequence</a></li>
+
+    </ul>
+
+    <h1>Time Slot Creator</h1>
+
+    <form id="timeSlotForm">
+        <label for="startDateTime">Start Date and Time:</label>
+        <input type="text" id="startDateTime" placeholder="Select start date and time" required=""
+            class="flatpickr-input" readonly="readonly">
+
+        <label for="endDateTime">End Date and Time:</label>
+        <input type="text" id="endDateTime" placeholder="Select end date and time" required="" class="flatpickr-input"
+            readonly="readonly">
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1" required="">
+
+        <label for="role">Role:</label>
+        <select id="role" required="">
+            <option value="staff_level_1">Staff Level 1</option>
+            <option value="staff_level_2">Staff Level 2</option>
+            <option value="supervisor">Supervisor</option>
+        </select>
+
+        <button type="button" onclick="addTimeSlots()">Add Time Slots</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Start Date and Time</th>
+                <th>End Date and Time</th>
+                <th>Role</th>
+                <th>Duration (Hours)</th>
+            </tr>
+        </thead>
+        <tbody id="timeSlotsTableBody">
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td>749.00 hours</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="exportBtn" onclick="exportToCSV()">Export to CSV</button>
+    <button id="sendToDBBtn" onclick="sendToDatabase()">Send to Database</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#startDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        flatpickr("#endDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        function calculateDuration(start, end) {
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            const durationInMilliseconds = endDate - startDate;
+            const durationInHours = durationInMilliseconds / (1000 * 60 * 60);
+            return durationInHours.toFixed(2);
+        }
+
+        function updateDuration(row) {
+            const startDateTime = row.cells[0].querySelector('input').value;
+            const endDateTime = row.cells[1].querySelector('input').value;
+            const durationCell = row.cells[3];
+
+            const duration = calculateDuration(startDateTime, endDateTime);
+            durationCell.textContent = duration + ' hours';
+        }
+
+        function addTimeSlots() {
+            const startDateTime = document.getElementById('startDateTime').value;
+            const endDateTime = document.getElementById('endDateTime').value;
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const role = document.getElementById('role').value;
+
+            if (startDateTime && endDateTime && !isNaN(quantity) && quantity > 0 && role) {
+                const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+
+                for (let i = 0; i < quantity; i++) {
+                    const row = timeSlotsTableBody.insertRow(-1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+
+                    // Create editable input fields
+                    const startInput = document.createElement('input');
+                    startInput.type = 'text';
+                    startInput.value = startDateTime;
+                    startInput.addEventListener('input', () => updateDuration(row));
+                    cell1.appendChild(startInput);
+
+                    const endInput = document.createElement('input');
+                    endInput.type = 'text';
+                    endInput.value = endDateTime;
+                    endInput.addEventListener('input', () => updateDuration(row));
+                    cell2.appendChild(endInput);
+
+                    const roleInput = document.createElement('input');
+                    roleInput.type = 'text';
+                    roleInput.value = role;
+                    roleInput.addEventListener('input', () => updateDuration(row));
+                    cell3.appendChild(roleInput);
+
+                    // Calculate and display the duration
+                    const duration = calculateDuration(startDateTime, endDateTime);
+                    cell4.textContent = duration + ' hours';
+                }
+
+                // Clear the form fields
+                document.getElementById('startDateTime').value = '';
+                document.getElementById('endDateTime').value = '';
+                document.getElementById('quantity').value = 1;
+                document.getElementById('role').value = '';
+            } else {
+                alert('Please enter valid values for start date/time, end date/time, quantity, and role.');
+            }
+
+            // Collect data to be sent to the server
+            const formData = {
+                startDateTime,
+                endDateTime,
+                role,
+                duration: calculateDuration(startDateTime, endDateTime)
+            };
+
+            // Send data to the server using AJAX
+            $.ajax({
+                type: 'POST',
+                url: '/add_time_slots',  // Endpoint to handle the data on the server
+                data: formData,
+                success: function (response) {
+                    alert(response.message);  // Show the server response
+                },
+                error: function (error) {
+                    alert('Error: ' + error.responseJSON.error);
+                }
+            });
+
+        }
+
+        function exportToCSV() {
+            const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+            const rows = timeSlotsTableBody.getElementsByTagName('tr');
+            const csvContent = [];
+
+            // Add header row to CSV
+            const headerRow = Array.from(rows[0].getElementsByTagName('th')).map(cell => cell.textContent);
+            csvContent.push(headerRow.join(','));
+
+            // Add data rows to CSV
+            for (let i = 1; i < rows.length; i++) {
+                const dataRow = Array.from(rows[i].querySelectorAll('input, td'))
+                    .map(cell => cell.textContent || cell.value);
+                csvContent.push(dataRow.join(','));
+            }
+
+            // Create a Blob containing the CSV data
+            const csvData = new Blob([csvContent.join('\n')], { type: 'text/csv' });
+
+            // Create a download link and trigger a click event to download the file
+            const downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(csvData);
+            downloadLink.download = 'time_slots.csv';
+            downloadLink.click();
+        }
+
+        function sendToDatabase() {
+            const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+            const rows = timeSlotsTableBody.getElementsByTagName('tr');
+
+            const data = [];
+
+            // Collect data from table rows
+            for (let i = 1; i < rows.length; i++) {
+                const rowData = Array.from(rows[i].querySelectorAll('input'))
+                    .map(input => input.value);
+                data.push(rowData);
+            }
+
+            // Send data to the server-side Flask route
+            fetch('/insert_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data }),
+            })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+    </script>
+    <div class="flatpickr-calendar hasTime animate arrowTop arrowLeft" tabindex="-1"
+        style="top: 384.867px; left: 476.3px; right: auto;">
+        <div class="flatpickr-months"><span class="flatpickr-prev-month"><svg version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17">
+                    <g></g>
+                    <path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z">
+                    </path>
+                </svg></span>
+            <div class="flatpickr-month">
+                <div class="flatpickr-current-month"><select class="flatpickr-monthDropdown-months" aria-label="Month"
+                        tabindex="-1">
+                        <option class="flatpickr-monthDropdown-month" value="0" tabindex="-1">January</option>
+                        <option class="flatpickr-monthDropdown-month" value="1" tabindex="-1">February</option>
+                        <option class="flatpickr-monthDropdown-month" value="2" tabindex="-1">March</option>
+                        <option class="flatpickr-monthDropdown-month" value="3" tabindex="-1">April</option>
+                        <option class="flatpickr-monthDropdown-month" value="4" tabindex="-1">May</option>
+                        <option class="flatpickr-monthDropdown-month" value="5" tabindex="-1">June</option>
+                        <option class="flatpickr-monthDropdown-month" value="6" tabindex="-1">July</option>
+                        <option class="flatpickr-monthDropdown-month" value="7" tabindex="-1">August</option>
+                        <option class="flatpickr-monthDropdown-month" value="8" tabindex="-1">September</option>
+                        <option class="flatpickr-monthDropdown-month" value="9" tabindex="-1">October</option>
+                        <option class="flatpickr-monthDropdown-month" value="10" tabindex="-1">November</option>
+                        <option class="flatpickr-monthDropdown-month" value="11" tabindex="-1">December</option>
+                    </select>
+                    <div class="numInputWrapper"><input class="numInput cur-year" type="number" tabindex="-1"
+                            aria-label="Year"><span class="arrowUp"></span><span class="arrowDown"></span></div>
+                </div>
+            </div><span class="flatpickr-next-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17">
+                    <g></g>
+                    <path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z">
+                    </path>
+                </svg></span>
+        </div>
+        <div class="flatpickr-innerContainer">
+            <div class="flatpickr-rContainer">
+                <div class="flatpickr-weekdays">
+                    <div class="flatpickr-weekdaycontainer">
+                        <span class="flatpickr-weekday">
+                            Sun</span><span class="flatpickr-weekday">Mon</span><span
+                            class="flatpickr-weekday">Tue</span><span class="flatpickr-weekday">Wed</span><span
+                            class="flatpickr-weekday">Thu</span><span class="flatpickr-weekday">Fri</span><span
+                            class="flatpickr-weekday">Sat
+                        </span>
+                    </div>
+                </div>
+                <div class="flatpickr-days" tabindex="-1">
+                    <div class="dayContainer"><span class="flatpickr-day prevMonthDay" aria-label="October 29, 2023"
+                            tabindex="-1">29</span><span class="flatpickr-day prevMonthDay"
+                            aria-label="October 30, 2023" tabindex="-1">30</span><span
+                            class="flatpickr-day prevMonthDay" aria-label="October 31, 2023"
+                            tabindex="-1">31</span><span class="flatpickr-day" aria-label="November 1, 2023"
+                            tabindex="-1">1</span><span class="flatpickr-day" aria-label="November 2, 2023"
+                            tabindex="-1">2</span><span class="flatpickr-day" aria-label="November 3, 2023"
+                            tabindex="-1">3</span><span class="flatpickr-day" aria-label="November 4, 2023"
+                            tabindex="-1">4</span><span class="flatpickr-day" aria-label="November 5, 2023"
+                            tabindex="-1">5</span><span class="flatpickr-day" aria-label="November 6, 2023"
+                            tabindex="-1">6</span><span class="flatpickr-day" aria-label="November 7, 2023"
+                            tabindex="-1">7</span><span class="flatpickr-day" aria-label="November 8, 2023"
+                            tabindex="-1">8</span><span class="flatpickr-day" aria-label="November 9, 2023"
+                            tabindex="-1">9</span><span class="flatpickr-day" aria-label="November 10, 2023"
+                            tabindex="-1">10</span><span class="flatpickr-day" aria-label="November 11, 2023"
+                            tabindex="-1">11</span><span class="flatpickr-day" aria-label="November 12, 2023"
+                            tabindex="-1">12</span><span class="flatpickr-day" aria-label="November 13, 2023"
+                            tabindex="-1">13</span><span class="flatpickr-day" aria-label="November 14, 2023"
+                            tabindex="-1">14</span><span class="flatpickr-day" aria-label="November 15, 2023"
+                            tabindex="-1">15</span><span class="flatpickr-day" aria-label="November 16, 2023"
+                            tabindex="-1">16</span><span class="flatpickr-day" aria-label="November 17, 2023"
+                            tabindex="-1">17</span><span class="flatpickr-day" aria-label="November 18, 2023"
+                            tabindex="-1">18</span><span class="flatpickr-day" aria-label="November 19, 2023"
+                            tabindex="-1">19</span><span class="flatpickr-day" aria-label="November 20, 2023"
+                            tabindex="-1">20</span><span class="flatpickr-day" aria-label="November 21, 2023"
+                            tabindex="-1">21</span><span class="flatpickr-day" aria-label="November 22, 2023"
+                            tabindex="-1">22</span><span class="flatpickr-day" aria-label="November 23, 2023"
+                            tabindex="-1">23</span><span class="flatpickr-day" aria-label="November 24, 2023"
+                            tabindex="-1">24</span><span class="flatpickr-day" aria-label="November 25, 2023"
+                            tabindex="-1">25</span><span class="flatpickr-day" aria-label="November 26, 2023"
+                            tabindex="-1">26</span><span class="flatpickr-day" aria-label="November 27, 2023"
+                            tabindex="-1">27</span><span class="flatpickr-day selected" aria-label="November 28, 2023"
+                            tabindex="-1">28</span><span class="flatpickr-day" aria-label="November 29, 2023"
+                            tabindex="-1">29</span><span class="flatpickr-day" aria-label="November 30, 2023"
+                            tabindex="-1">30</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 1, 2023" tabindex="-1">1</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 2, 2023" tabindex="-1">2</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 3, 2023" tabindex="-1">3</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 4, 2023" tabindex="-1">4</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 5, 2023" tabindex="-1">5</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 6, 2023" tabindex="-1">6</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 7, 2023" tabindex="-1">7</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 8, 2023" tabindex="-1">8</span><span class="flatpickr-day nextMonthDay"
+                            aria-label="December 9, 2023" tabindex="-1">9</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="flatpickr-time" tabindex="-1">
+            <div class="numInputWrapper"><input class="numInput flatpickr-hour" type="number" aria-label="Hour"
+                    tabindex="-1" step="1" min="1" max="12" maxlength="2"><span class="arrowUp"></span><span
+                    class="arrowDown"></span></div><span class="flatpickr-time-separator">:</span>
+            <div class="numInputWrapper"><input class="numInput flatpickr-minute" type="number" aria-label="Minute"
+                    tabindex="-1" step="5" min="0" max="59" maxlength="2"><span class="arrowUp"></span><span
+                    class="arrowDown"></span></div><span class="flatpickr-am-pm" title="Click to toggle"
+                tabindex="-1">PM</span>
+        </div>
+    </div>
+    <div class="flatpickr-calendar hasTime animate arrowTop arrowLeft" tabindex="-1"
+        style="top: 463.867px; left: 476.3px; right: auto;">
+        <div class="flatpickr-months"><span class="flatpickr-prev-month"><svg version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17">
+                    <g></g>
+                    <path d="M5.207 8.471l7.146 7.147-0.707 0.707-7.853-7.854 7.854-7.853 0.707 0.707-7.147 7.146z">
+                    </path>
+                </svg></span>
+            <div class="flatpickr-month">
+                <div class="flatpickr-current-month"><select class="flatpickr-monthDropdown-months" aria-label="Month"
+                        tabindex="-1">
+                        <option class="flatpickr-monthDropdown-month" value="0" tabindex="-1">January</option>
+                        <option class="flatpickr-monthDropdown-month" value="1" tabindex="-1">February</option>
+                        <option class="flatpickr-monthDropdown-month" value="2" tabindex="-1">March</option>
+                        <option class="flatpickr-monthDropdown-month" value="3" tabindex="-1">April</option>
+                        <option class="flatpickr-monthDropdown-month" value="4" tabindex="-1">May</option>
+                        <option class="flatpickr-monthDropdown-month" value="5" tabindex="-1">June</option>
+                        <option class="flatpickr-monthDropdown-month" value="6" tabindex="-1">July</option>
+                        <option class="flatpickr-monthDropdown-month" value="7" tabindex="-1">August</option>
+                        <option class="flatpickr-monthDropdown-month" value="8" tabindex="-1">September</option>
+                        <option class="flatpickr-monthDropdown-month" value="9" tabindex="-1">October</option>
+                        <option class="flatpickr-monthDropdown-month" value="10" tabindex="-1">November</option>
+                        <option class="flatpickr-monthDropdown-month" value="11" tabindex="-1">December</option>
+                    </select>
+                    <div class="numInputWrapper"><input class="numInput cur-year" type="number" tabindex="-1"
+                            aria-label="Year"><span class="arrowUp"></span><span class="arrowDown"></span></div>
+                </div>
+            </div><span class="flatpickr-next-month"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17 17">
+                    <g></g>
+                    <path d="M13.207 8.472l-7.854 7.854-0.707-0.707 7.146-7.146-7.146-7.148 0.707-0.707 7.854 7.854z">
+                    </path>
+                </svg></span>
+        </div>
+        <div class="flatpickr-innerContainer">
+            <div class="flatpickr-rContainer">
+                <div class="flatpickr-weekdays">
+                    <div class="flatpickr-weekdaycontainer">
+                        <span class="flatpickr-weekday">
+                            Sun</span><span class="flatpickr-weekday">Mon</span><span
+                            class="flatpickr-weekday">Tue</span><span class="flatpickr-weekday">Wed</span><span
+                            class="flatpickr-weekday">Thu</span><span class="flatpickr-weekday">Fri</span><span
+                            class="flatpickr-weekday">Sat
+                        </span>
+                    </div>
+                </div>
+                <div class="flatpickr-days" tabindex="-1">
+                    <div class="dayContainer"><span class="flatpickr-day prevMonthDay" aria-label="November 26, 2023"
+                            tabindex="-1">26</span><span class="flatpickr-day prevMonthDay"
+                            aria-label="November 27, 2023" tabindex="-1">27</span><span
+                            class="flatpickr-day prevMonthDay" aria-label="November 28, 2023"
+                            tabindex="-1">28</span><span class="flatpickr-day prevMonthDay"
+                            aria-label="November 29, 2023" tabindex="-1">29</span><span
+                            class="flatpickr-day prevMonthDay" aria-label="November 30, 2023"
+                            tabindex="-1">30</span><span class="flatpickr-day" aria-label="December 1, 2023"
+                            tabindex="-1">1</span><span class="flatpickr-day" aria-label="December 2, 2023"
+                            tabindex="-1">2</span><span class="flatpickr-day" aria-label="December 3, 2023"
+                            tabindex="-1">3</span><span class="flatpickr-day" aria-label="December 4, 2023"
+                            tabindex="-1">4</span><span class="flatpickr-day" aria-label="December 5, 2023"
+                            tabindex="-1">5</span><span class="flatpickr-day" aria-label="December 6, 2023"
+                            tabindex="-1">6</span><span class="flatpickr-day" aria-label="December 7, 2023"
+                            tabindex="-1">7</span><span class="flatpickr-day" aria-label="December 8, 2023"
+                            tabindex="-1">8</span><span class="flatpickr-day" aria-label="December 9, 2023"
+                            tabindex="-1">9</span><span class="flatpickr-day" aria-label="December 10, 2023"
+                            tabindex="-1">10</span><span class="flatpickr-day" aria-label="December 11, 2023"
+                            tabindex="-1">11</span><span class="flatpickr-day" aria-label="December 12, 2023"
+                            tabindex="-1">12</span><span class="flatpickr-day" aria-label="December 13, 2023"
+                            tabindex="-1">13</span><span class="flatpickr-day" aria-label="December 14, 2023"
+                            tabindex="-1">14</span><span class="flatpickr-day" aria-label="December 15, 2023"
+                            tabindex="-1">15</span><span class="flatpickr-day" aria-label="December 16, 2023"
+                            tabindex="-1">16</span><span class="flatpickr-day" aria-label="December 17, 2023"
+                            tabindex="-1">17</span><span class="flatpickr-day" aria-label="December 18, 2023"
+                            tabindex="-1">18</span><span class="flatpickr-day" aria-label="December 19, 2023"
+                            tabindex="-1">19</span><span class="flatpickr-day" aria-label="December 20, 2023"
+                            tabindex="-1">20</span><span class="flatpickr-day" aria-label="December 21, 2023"
+                            tabindex="-1">21</span><span class="flatpickr-day" aria-label="December 22, 2023"
+                            tabindex="-1">22</span><span class="flatpickr-day" aria-label="December 23, 2023"
+                            tabindex="-1">23</span><span class="flatpickr-day" aria-label="December 24, 2023"
+                            tabindex="-1">24</span><span class="flatpickr-day" aria-label="December 25, 2023"
+                            tabindex="-1">25</span><span class="flatpickr-day today" aria-label="December 26, 2023"
+                            aria-current="date" tabindex="-1">26</span><span class="flatpickr-day"
+                            aria-label="December 27, 2023" tabindex="-1">27</span><span class="flatpickr-day"
+                            aria-label="December 28, 2023" tabindex="-1">28</span><span class="flatpickr-day selected"
+                            aria-label="December 29, 2023" tabindex="-1">29</span><span class="flatpickr-day"
+                            aria-label="December 30, 2023" tabindex="-1">30</span><span class="flatpickr-day"
+                            aria-label="December 31, 2023" tabindex="-1">31</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 1, 2024" tabindex="-1">1</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 2, 2024" tabindex="-1">2</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 3, 2024" tabindex="-1">3</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 4, 2024" tabindex="-1">4</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 5, 2024" tabindex="-1">5</span><span
+                            class="flatpickr-day nextMonthDay" aria-label="January 6, 2024" tabindex="-1">6</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="flatpickr-time" tabindex="-1">
+            <div class="numInputWrapper"><input class="numInput flatpickr-hour" type="number" aria-label="Hour"
+                    tabindex="-1" step="1" min="1" max="12" maxlength="2"><span class="arrowUp"></span><span
+                    class="arrowDown"></span></div><span class="flatpickr-time-separator">:</span>
+            <div class="numInputWrapper"><input class="numInput flatpickr-minute" type="number" aria-label="Minute"
+                    tabindex="-1" step="5" min="0" max="59" maxlength="2"><span class="arrowUp"></span><span
+                    class="arrowDown"></span></div><span class="flatpickr-am-pm" title="Click to toggle"
+                tabindex="-1">PM</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

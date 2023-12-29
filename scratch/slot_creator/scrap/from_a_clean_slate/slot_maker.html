@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+
+<body>
+    <form id="timeSlotForm">
+        <label for="startDateTime">Start DateTime:</label>
+        <input type="text" id="startDateTime" placeholder="Select Date and Time.." required>
+ 
+        <label for="endDateTime">End DateTime:</label>
+        <input type="text" id="endDateTime" placeholder="Select Date and Time.." required>
+    </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr('#startDateTime', {
+            mode: "multiple",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+        flatpickr('#endDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+    </script>
+</body>

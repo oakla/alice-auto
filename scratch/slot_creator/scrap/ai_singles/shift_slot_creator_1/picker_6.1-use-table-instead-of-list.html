@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Slot Creator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbs5uMz9ATKxIep9tiCxS/Z9fNfEXIaVaQfDl1at0L3iZzEZNxFz9Kj9JmPSJIU6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Time Slot Creator</h1>
+  <form id="timeSlotForm">
+    <div class="mb-3">
+      <label for="startDate">Start Date and Time</label>
+      <input type="text" class="form-control" id="startDate" placeholder="Select date and time" required>
+    </div>
+    <div class="mb-3">
+      <label for="endDate">End Date and Time</label>
+      <input type="text" class="form-control" id="endDate" placeholder="Select date and time" required>
+    </div>
+    <div class="mb-3">
+      <label for="role">Role</label>
+      <select class="form-select" id="role" required>
+        <option value="staff">Staff</option>
+        <option value="supervisor">Supervisor</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="newRole">Add New Role</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="newRole">
+        <button type="button" class="btn btn-secondary" onclick="addNewRole()">Add</button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="instances">Number of Instances</label>
+      <input type="number" class="form-control" id="instances" value="1" min="1">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="addTimeSlot()">Add Time Slot(s)</button>
+  </form>
+
+  <h2>Time Slots</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Start Date and Time</th>
+          <th>End Date and Time</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="timeSlotList">
+        <!-- Time slots will be added here dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.js"></script>
+<script>
+  // Initialize flatpickr for date and time input fields
+  flatpickr("#startDate", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+  });
+
+  flatpickr("#endDate", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+  });
+
+  function addTimeSlot() {
+    // Get values from the form
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const role = document.getElementById('role').value;
+    const instances = parseInt(document.getElementById('instances').value, 10) || 1;
+
+    for (let i = 0; i < instances; i++) {
+      // Create a new table row
+      const tableRow = document.createElement('tr');
+      tableRow.innerHTML = `
+        <td>${startDate}</td>
+        <td>${endDate}</td>
+        <td>${role}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteTimeSlot(this)">Delete</button>
+        </td>
+      `;
+
+      // Add the table row to the table
+      document.getElementById('timeSlotList').appendChild(tableRow);
+    }
+
+    // Clear the form fields
+    document.getElementById('timeSlotForm').reset();
+  }
+
+  function deleteTimeSlot(button) {
+    // Remove the parent table row when the delete button is clicked
+    const tableRow = button.closest('tr');
+    tableRow.remove();
+  }
+
+  function addNewRole() {
+    // Get the new role from the input field
+    const newRole = document.getElementById('newRole').value.trim();
+
+    // Check if the role is not empty and does not already exist in the dropdown
+    if (newRole !== '' && !document.getElementById('role').querySelector(`option[value="${newRole}"]`)) {
+      // Create a new option element
+      const option = document.createElement('option');
+      option.value = newRole;
+      option.textContent = newRole;
+
+      // Add the new option to the dropdown
+      document.getElementById('role').appendChild(option);
+
+      // Clear the input field
+      document.getElementById('newRole').value = '';
+    }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-nbP7dm25WsOYpC6Vr5u4x8tqnr3jPkqt6vR2Ivsqo7gqR8UBAvmqIaCyBQ1p2q8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-GLhlTQ8iK9tL3ohGGn3+5U5fijXO9f7SkI1o6Qh6TSc0QqL8QC6bAGFj6GdA2H6f" crossorigin="anonymous"></script>
+</body>
+</html>

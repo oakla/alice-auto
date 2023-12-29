@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Slot Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #timeSlots {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .time-slot {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Time Slot Creator</h1>
+    
+    <form id="timeSlotForm">
+        <label for="startDateTime">Start Date and Time:</label>
+        <input type="datetime-local" id="startDateTime" required>
+
+        <label for="endDateTime">End Date and Time:</label>
+        <input type="datetime-local" id="endDateTime" required>
+
+        <button type="button" onclick="addTimeSlot()">Add Time Slot</button>
+    </form>
+
+    <ul id="timeSlots"></ul>
+
+    <script>
+        function addTimeSlot() {
+            const startDateTime = document.getElementById('startDateTime').value;
+            const endDateTime = document.getElementById('endDateTime').value;
+
+            if (startDateTime && endDateTime) {
+                const timeSlotsList = document.getElementById('timeSlots');
+                const listItem = document.createElement('li');
+                listItem.className = 'time-slot';
+                listItem.textContent = `Start: ${startDateTime}, End: ${endDateTime}`;
+                timeSlotsList.appendChild(listItem);
+
+                // Clear the form fields
+                document.getElementById('startDateTime').value = '';
+                document.getElementById('endDateTime').value = '';
+            } else {
+                alert('Please enter both start and end date/time.');
+            }
+        }
+    </script>
+</body>
+</html>

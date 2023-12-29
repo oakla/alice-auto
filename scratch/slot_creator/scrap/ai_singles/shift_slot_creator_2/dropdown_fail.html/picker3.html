@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #timeSlots {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .time-slot {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Time Slot Creator</h1>
+    
+    <form id="timeSlotForm">
+        <label for="startDateTime">Start Date and Time:</label>
+        <input type="text" id="startDateTime" placeholder="Select start date and time" required>
+
+        <label for="endDateTime">End Date and Time:</label>
+        <input type="text" id="endDateTime" placeholder="Select end date and time" required>
+
+        <label for="role">Role:</label>
+        <select id="role" required>
+            <option value="staff">Staff</option>
+            <option value="supervisor">Supervisor</option>
+        </select>
+
+        <button type="button" onclick="addTimeSlot()">Add Time Slot</button>
+    </form>
+
+    <ul id="timeSlots"></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#startDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        flatpickr("#endDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        function addTimeSlot() {
+            const startDateTime = document.getElementById('startDateTime').value;
+            const endDateTime = document.getElementById('endDateTime').value;
+            const role = document.getElementById('role').value;
+
+            if (startDateTime && endDateTime && role) {
+                const timeSlotsList = document.getElementById('timeSlots');
+                const listItem = document.createElement('li');
+                listItem.className = 'time-slot';
+                listItem.textContent = `Start: ${startDateTime}, End: ${endDateTime}, Role: ${role}`;
+                timeSlotsList.appendChild(listItem);
+
+                // Clear the form fields
+                document.getElementById('startDateTime').value = '';
+                document.getElementById('endDateTime').value = '';
+                document.getElementById('role').value = 'staff'; // Reset to the default value
+            } else {
+                alert('Please enter start/end date/time and select a role.');
+            }
+        }
+    </script>
+</body>
+</html>

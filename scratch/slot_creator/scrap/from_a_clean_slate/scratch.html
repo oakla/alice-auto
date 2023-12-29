@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Time Slot Creator</h1>
+    <div>
+        <form id="timeSlotForm">
+            <div class="calendar-container">
+                <div>
+                    <label for="startDateTime">Start DateTime:</label>
+                    <input type="text" id="startDateTime" placeholder="Select Date and Time.." required>
+                </div>
+                
+                <div>
+                    <label for="endDateTime">End DateTime:</label>
+                    <input type="text" id="endDateTime" placeholder="Select Date and Time.." required>
+                </div>
+            </div>
+            <div class="non-calendar-container">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1" required>
+                
+                <label for="role">Role:</label>
+                <select id="role" required>
+                    <option value="staff_level_1">Staff Level 1</option>
+                    <option value="staff_level_2">Staff Level 2</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+            </div>
+                
+            <div>        
+                <!-- <button type="button" onclick="addTimeSlots()">Add Time Slots</button> -->
+                <button type="button" onclick="addTimeSlots()">Add Time Slots</button>
+            </div>
+
+        </form>
+        <div id="message"></div>
+        <button id="exportBtn" onclick="exportToCSV()">Export to CSV</button>
+        
+    </div>
+
+    <table>
+        <thead id="timeSlotHeaderRow">
+            <tr>
+                <th>Start Date and Time</th>
+                <th>End Date and Time</th>
+                <th>Role</th>
+                <th>Duration (Hours)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="timeSlotsTableBody"></tbody>
+    </table>    
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    
+    flatpickr('#startDateTime', {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        inline: true,
+        time_24hr: true,
+        weekNumbers: true,
+        defaultDate: "2023-12-25 09:00",
+    });
+    
+    
+    flatpickr('#endDateTime', {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        inline: true,
+        time_24hr: true,
+        weekNumbers: true,
+        defaultDate: "2023-12-26 18.00",
+    });</script>
+    <script src="script.js"></script>   
+
+    <script src="export.js"></script>
+
+</body>
+</html>

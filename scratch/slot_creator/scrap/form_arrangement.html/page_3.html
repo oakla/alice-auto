@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-top: 8px;
+            color: #333;
+        }      
+        .calendar-container {
+            display: flex;
+            gap: 20px; /* Adjust the gap between calendars as needed */
+        }
+        #quantity {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            width: 6rem;
+        }
+        #startDateTime,
+        #endDateTime {
+            width: 100%;
+        }   
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }        
+
+    </style>
+</head>
+
+<body>
+    <h1>Time Slot Creator</h1>
+    <div>
+        <form id="timeSlotForm">
+            <div class="calendar-container">
+                <div>
+                    <label for="startDateTime">Start DateTime:</label>
+                    <input type="text" id="startDateTime" placeholder="Select Date and Time.." required>
+                </div>
+                
+                <div>
+                    <label for="endDateTime">End DateTime:</label>
+                    <input type="text" id="endDateTime" placeholder="Select Date and Time.." required>
+                </div>
+            </div>
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1" required>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr('#startDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+        flatpickr('#endDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #exportBtn {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #exportBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Time Slot Creator</h1>
+    
+    <form id="timeSlotForm">
+        <label for="startDateTime">Start Date and Time:</label>
+        <input type="text" id="startDateTime" placeholder="Select start date and time" required>
+
+        <label for="endDateTime">End Date and Time:</label>
+        <input type="text" id="endDateTime" placeholder="Select end date and time" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" value="1" required>
+
+        <label for="role">Role:</label>
+        <select id="role" required>
+            <option value="staff_level_1">Staff Level 1</option>
+            <option value="staff_level_2">Staff Level 2</option>
+            <option value="supervisor">Supervisor</option>
+        </select>
+
+        <button type="button" onclick="addTimeSlots()">Add Time Slots</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Start Date and Time</th>
+                <th>End Date and Time</th>
+                <th>Role</th>
+                <th>Duration (Hours)</th>
+            </tr>
+        </thead>
+        <tbody id="timeSlotsTableBody"></tbody>
+    </table>
+
+    <button id="exportBtn" onclick="exportToCSV()">Export to CSV</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#startDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        flatpickr("#endDateTime", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        function calculateDuration(start, end) {
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            const durationInMilliseconds = endDate - startDate;
+            const durationInHours = durationInMilliseconds / (1000 * 60 * 60);
+            return durationInHours.toFixed(2);
+        }
+
+        function updateDuration(row) {
+            const startDateTime = row.cells[0].querySelector('input').value;
+            const endDateTime = row.cells[1].querySelector('input').value;
+            const durationCell = row.cells[3];
+
+            const duration = calculateDuration(startDateTime, endDateTime);
+            durationCell.textContent = duration + ' hours';
+        }
+
+        function addTimeSlots() {
+            const startDateTime = document.getElementById('startDateTime').value;
+            const endDateTime = document.getElementById('endDateTime').value;
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const role = document.getElementById('role').value;
+
+            if (startDateTime && endDateTime && !isNaN(quantity) && quantity > 0 && role) {
+                const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+
+                for (let i = 0; i < quantity; i++) {
+                    const row = timeSlotsTableBody.insertRow(-1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+
+                    // Create editable input fields
+                    const startInput = document.createElement('input');
+                    startInput.type = 'text';
+                    startInput.value = startDateTime;
+                    startInput.addEventListener('input', () => updateDuration(row));
+                    cell1.appendChild(startInput);
+
+                    const endInput = document.createElement('input');
+                    endInput.type = 'text';
+                    endInput.value = endDateTime;
+                    endInput.addEventListener('input', () => updateDuration(row));
+                    cell2.appendChild(endInput);
+
+                    const roleInput = document.createElement('input');
+                    roleInput.type = 'text';
+                    roleInput.value = role;
+                    roleInput.addEventListener('input', () => updateDuration(row));
+                    cell3.appendChild(roleInput);
+
+                    // Calculate and display the duration
+                    const duration = calculateDuration(startDateTime, endDateTime);
+                    cell4.textContent = duration + ' hours';
+                }
+
+                // Clear the form fields
+                document.getElementById('startDateTime').value = '';
+                document.getElementById('endDateTime').value = '';
+                document.getElementById('quantity').value = 1;
+                document.getElementById('role').value = '';
+            } else {
+                alert('Please enter valid values for start date/time, end date/time, quantity, and role.');
+            }
+        }
+
+        function exportToCSV() {
+            const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+            const rows = timeSlotsTableBody.getElementsByTagName('tr');
+            const csvContent = [];
+
+            // Add header row to CSV
+            const headerRow = Array.from(rows[0].getElementsByTagName('th')).map(cell => cell.textContent);
+            csvContent.push(headerRow.join(','));
+
+            // Add data rows to CSV
+            for (let i = 1; i < rows.length; i++) {
+                const dataRow = Array.from(rows[i].querySelectorAll('input, td'))
+                    .map(cell => cell.textContent || cell.value);
+                csvContent.push(dataRow.join(','));
+            }
+
+            // Create a Blob containing the CSV data
+            const csvData = new Blob([csvContent.join('\n')], { type: 'text/csv' });
+
+            // Create a download link and trigger a click event to download the file
+            const downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(csvData);
+            downloadLink.download = 'time_slots.csv';
+            downloadLink.click();
+        }
+    </script>
+</body>
+</html>

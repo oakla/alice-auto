@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .calendar-container {
+            display: flex;
+            gap: 20px; /* Adjust the gap between calendars as needed */
+        }
+
+        #startDateTime,
+        #endDateTime {
+            width: 100%;
+        }
+
+        #timeSlotForm {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calendar-container">
+        <form id="timeSlotForm">
+            <div>
+                <div>
+                    <label for="startDateTime">Start DateTime:</label>
+                    <input type="text" id="startDateTime" placeholder="Select Date and Time.." required>
+                </div>
+                
+                <div>
+                    <label for="endDateTime">End DateTime:</label>
+                    <input type="text" id="endDateTime" placeholder="Select Date and Time.." required>
+                </div>
+            </div>
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1" required>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr('#startDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+        flatpickr('#endDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+        });
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Data Viewer</title>
+    <style>
+        #error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CSV Data Viewer</h1>
+
+    <input type="file" id="csv-file-input" accept=".csv">
+    <div id="error-message"></div>
+    <table id="data-table" style="display: none;">
+        <!-- Table headers will be dynamically added here -->
+    </table>
+
+    <script>
+        document.getElementById('csv-file-input').addEventListener('change', handleFileSelect);
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const contents = e.target.result;
+                    parseCSV(contents);
+                };
+
+                reader.readAsText(file);
+            }
+        }
+
+        function parseCSV(csvContent) {
+            const lines = csvContent.split('\n');
+            const headers = lines[0].trim().split(',');
+
+            // Check if the required headers are present
+            const requiredHeaders = ['start', 'end', 'role'];
+            const missingHeaders = requiredHeaders.filter(header => !headers.includes(header));
+            const extraHeaders = headers.filter(header => !requiredHeaders.includes(header));
+
+            // Display error message if headers are incorrect
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.innerHTML = '';
+
+            if (missingHeaders.length > 0 || extraHeaders.length > 0) {
+                errorMessage.innerHTML = 'Error: Incorrect headers. Expected headers: start, end, role';
+            } else {
+                displayTable(lines);
+            }
+        }
+
+        function displayTable(lines) {
+            const dataTable = document.getElementById('data-table');
+            dataTable.innerHTML = '';
+
+            // Add table headers
+            const headerRow = document.createElement('tr');
+            const headers = lines[0].trim().split(',');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            dataTable.appendChild(headerRow);
+
+            // Add table rows
+            for (let i = 1; i < lines.length; i++) {
+                const rowData = lines[i].trim().split(',');
+                const row = document.createElement('tr');
+                rowData.forEach(data => {
+                    const td = document.createElement('td');
+                    td.textContent = data;
+                    row.appendChild(td);
+                });
+                dataTable.appendChild(row);
+            }
+
+            // Show the table
+            dataTable.style.display = 'table';
+        }
+    </script>
+
+</body>
+</html>

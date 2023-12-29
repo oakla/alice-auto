@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Slot Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-top: 8px;
+            color: #333;
+        }      
+        .calendar-container {
+            display: flex;
+            gap: 20px; /* Adjust the gap between calendars as needed */
+        }
+        .non-calendar-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            width: 6rem;
+            margin-top: 1rem
+        }
+        #quantity {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            width: 6rem;
+        }
+        #startDateTime,
+        #endDateTime {
+            width: 100%;
+        }   
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 8px;
+            /* width: 100%; */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }   
+        
+        #exportBtn {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        #exportBtn:hover {
+            background-color: #45a049;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Time Slot Creator</h1>
+    <div>
+        <form id="timeSlotForm">
+            <div class="calendar-container">
+                <div>
+                    <label for="startDateTime">Start DateTime:</label>
+                    <input type="text" id="startDateTime" placeholder="Select Date and Time.." required>
+                </div>
+                
+                <div>
+                    <label for="endDateTime">End DateTime:</label>
+                    <input type="text" id="endDateTime" placeholder="Select Date and Time.." required>
+                </div>
+            </div>
+            <div class="non-calendar-container">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1" required>
+                
+                <label for="role">Role:</label>
+                <select id="role" required>
+                    <option value="staff_level_1">Staff Level 1</option>
+                    <option value="staff_level_2">Staff Level 2</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
+            </div>
+                
+            <div>        
+                <button type="button" onclick="addTimeSlots()">Add Time Slots</button>
+            </div>
+
+        </form>
+        <button id="exportBtn" onclick="exportToCSV()">Export to CSV</button>
+        
+    </div>
+
+    <table>
+        <thead id="timeSlotHeaderRow">
+            <tr>
+                <th>Start Date and Time</th>
+                <th>End Date and Time</th>
+                <th>Role</th>
+                <th>Duration (Hours)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="timeSlotsTableBody"></tbody>
+    </table>    
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr('#startDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+            defaultDate: "2023-12-25 09:00",
+        });
+        flatpickr('#endDateTime', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            inline: true,
+            time_24hr: true,
+            weekNumbers: true,
+            defaultDate: "2023-12-26 18.00",
+        });
+
+        function calculateDuration(start, end) {
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            const durationInMilliseconds = endDate - startDate;
+            const durationInHours = durationInMilliseconds / (1000 * 60 * 60);
+            return durationInHours.toFixed(2);
+        }
+
+        function updateDuration(row) {
+            const startDateTime = row.cells[0].querySelector('input').value;
+            const endDateTime = row.cells[1].querySelector('input').value;
+            const durationCell = row.cells[3];
+
+            const duration = calculateDuration(startDateTime, endDateTime);
+            durationCell.textContent = duration + ' hours';
+        }      
+
+        function addTimeSlots() {
+            const startDateTime = document.getElementById('startDateTime').value;
+            const endDateTime = document.getElementById('endDateTime').value;
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+            const role = document.getElementById('role').value;
+
+            if (startDateTime && endDateTime && !isNaN(quantity) && quantity > 0 && role) {
+                const timeSlotsTableBody = document.getElementById('timeSlotsTableBody');
+
+                for (let i = 0; i < quantity; i++) {
+                    const row = timeSlotsTableBody.insertRow(-1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    const cell5 = row.insertCell(4);
+
+                    // Create editable input fields
+                    // Add start
+                    const startInput = document.createElement('input');
+                    startInput.type = 'text';
+                    startInput.value = startDateTime;
+                    startInput.addEventListener('input', () => updateDuration(row));
+                    cell1.appendChild(startInput);
+
+                    // Add end
+                    const endInput = document.createElement('input');
+                    endInput.type = 'text';
+                    endInput.value = endDateTime;
+                    endInput.addEventListener('input', () => updateDuration(row));
+                    cell2.appendChild(endInput);
+
+                    // Add role
+                    const roleInput = document.createElement('input');
+                    roleInput.type = 'text';
+                    roleInput.value = role;
+                    roleInput.addEventListener('input', () => updateDuration(row));
+                    cell3.appendChild(roleInput);
+
+                    // Calculate and display the duration
+                    const duration = calculateDuration(startDateTime, endDateTime);
+                    cell4.textContent = duration + ' hours';
+
+                    // Add delete button
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', () => {
+                        row.remove();
+                    });
+                    cell5.appendChild(deleteButton);
+
+
+                }
+
+                // // Clear the form fields
+                // document.getElementById('startDateTime').value = '';
+                // document.getElementById('endDateTime').value = '';
+                // document.getElementById('quantity').value = 1;
+                // document.getElementById('role').value = '';
+            } else {
+                alert('Please enter valid values for start date/time, end date/time, quantity, and role.');
+            }
+        }
+
+        function getTableHeaders(){
+            headers = document.getElementById('timeSlotHeaderRow').querySelectorAll('th');
+            headers = Array.from(headers).map(th => th.textContent);
+            return headers;
+        }
+
+        function getTableRows(){
+            const table = document.getElementById('timeSlotsTableBody');
+            const rows = table.rows;
+            const data = [];
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const cells = row.cells;
+                const start = cells[0].querySelector('input').value;
+                const end = cells[1].querySelector('input').value;
+                const role = cells[2].querySelector('input').value;
+                // const duration = cells[3].textContent;
+                data.push({
+                    start,
+                    end,
+                    role,
+                    // duration,
+                });
+            }
+            return data;
+        }
+        
+        function exportToCSV() {
+            
+            // const headers = getTableHeaders();
+            const data = getTableRows();
+
+            const csvContent = [];
+            csvContent.push("start,end,role");
+            for (let i = 0; i < data.length; i++) {
+                const row = data[i];
+                const values = Object.values(row);
+                csvContent.push(values.join(','));
+            }
+
+            // Create a Blob containing the CSV data
+            const csvData = new Blob([csvContent.join('\n')], { type: 'text/csv' });
+
+            // Create a download link and trigger a click event to download the file
+            const downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(csvData);
+            downloadLink.download = 'time_slots.csv';
+            downloadLink.click();
+
+        }
+  
+
+
+    </script>
+
+
+</body>
+</html>
